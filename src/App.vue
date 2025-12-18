@@ -1,7 +1,7 @@
 <script setup>
 import TheHeader from './layouts/TheHeader.vue'
 import TheSidebar from './layouts/TheSidebar.vue'
-import Candidate from './views/candidates/Candidate.vue'
+import Candidate from './views/candidates/CandidateView.vue'
 </script>
 
 <template>
