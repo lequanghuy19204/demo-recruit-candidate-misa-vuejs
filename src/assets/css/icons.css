@@ -1,0 +1,265 @@
+/* Header */
+.icon-logo-header-left {
+  background: url("../icons/icon-logo.svg") no-repeat;
+  width: 32px;
+  height: 32px;
+}
+
+.icon-logo-backgroud {
+  background: url("https://amisplatform.misacdn.net/apps/recruit/navbar-bg-noel.ff04816e6511986f.svg")
+    no-repeat;
+  width: 199px;
+  height: 49px;
+}
+
+.icon-swich-app-white {
+  background: url("../icons/icon-swich-app-white.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-search {
+  background: url("../icons/ICON.svg") no-repeat -2px -658px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-notification-version-header-right {
+  background: url("../icons/icon-notification-version.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-store-header-right {
+  background: url("../icons/icon-store.svg") no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-user-controlpanel-header-right {
+  background: url("../icons/icon-user-controlpanel-item.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-messbox-header-right {
+  background: url("../icons/icon-messbox.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-notificationbox-header-right {
+  background: url("../icons/ICON.svg") no-repeat -212px -942px;
+  width: 20px;
+  height: 21px;
+}
+
+.icon-helpmenu-header-right {
+  background: url("../icons/ICON.svg") no-repeat -236px -942px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-moremenu-header-right {
+  background: url("../icons/ICON.svg") no-repeat -260px -942px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-knowledge-header-right {
+  background: url("../icons/icon-knowledge.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+/* Sidebar */
+.icon-sidebar-background {
+  background: url("../icons/icon-sidebar-background.svg") no-repeat;
+  width: 233px;
+  height: 827px;
+}
+
+.icon-sidebar-jobs {
+  background: url("../icons/ICON.svg") no-repeat -94px -113px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-sidebar-candidates {
+  background: url("../icons/ICON.svg") no-repeat -24px -112px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-sidebar-schedule {
+  background: url("../icons/ICON.svg") no-repeat -144px -113px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-sidebar-talent-pool {
+  background: url("../icons/ICON.svg") no-repeat 0px -112px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-sidebar-recruitment-campaign {
+  background: url("../icons/ICON.svg") no-repeat -73px -633px;
+  width: 22px;
+  height: 22px;
+}
+
+.icon-sidebar-tasks {
+  background: url("../icons/ICON.svg") no-repeat -336px -113px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-ai-marketing {
+  background: url("../icons/ICON.svg") no-repeat -160px -248px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-communication {
+  background: url("../icons/ICON.svg") no-repeat -72px -845px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-reports {
+  background: url("../icons/ICON.svg") no-repeat -72px -113px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-sidebar-settings {
+  background: url("../icons/ICON.svg") no-repeat 0px -136px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-left {
+  background: url("../icons/ICON.svg") no-repeat -66px -700px;
+  width: 7px;
+  height: 12px;
+}
+
+.icon-right {
+  background: url("../icons/ICON.svg") no-repeat -46px -700px;
+  width: 8px;
+  height: 12px;
+}
+
+/* Main content */
+.icon-add-candidate {
+  background: url("../icons/icon-add.svg") no-repeat;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-down {
+  background: url("../icons/icon-down.svg") no-repeat;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-ai-search-candidate {
+  background: url("../icons/icon-ai-search-candidate.svg") no-repeat;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-filter {
+  background: url("../icons/ICON.svg") no-repeat -42px -658px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-export {
+  background: url("../icons/ICON.svg") no-repeat -62px -658px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-interactive-history {
+  background: url("../icons/ICON.svg") no-repeat -4px -849px;
+  width: 17px;
+  height: 15px;
+}
+
+.icon-setting-column {
+  background: url("../icons/ICON.svg") no-repeat -25px -609px;
+  width: 22px;
+  height: 22px;
+}
+
+.icon-edit {
+  background: url("../icons/ICON.svg") no-repeat -182px -658px;
+  width: 17px;
+  height: 16px;
+}
+
+.icon-delete {
+  background: url("../icons/ICON.svg") no-repeat -222px -658px;
+  width: 16px;
+  height: 16px;
+}
+
+.icon-email {
+  background: url("../icons/ICON.svg") no-repeat -260px -656px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-tag {
+  background: url("../icons/ICON.svg") no-repeat -300px -656px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-task {
+  background: url("../icons/ICON.svg") no-repeat -340px -656px;
+  width: 20px;
+  height: 20px;
+}
+
+.icon-campaign {
+  background: url("../icons/ICON.svg") no-repeat -73px -633px;
+  width: 22px;
+  height: 20px;
+}
+
+/* Modal */
+.icon-close-modal {
+  background: url("../icons/ICON.svg") no-repeat -77px -141px;
+  width: 14px;
+  height: 14px;
+}
+
+.icon-plus-blue {
+  background: url("../icons/icon-plus-blue.svg") no-repeat;
+  width: 14px;
+  height: 14px;
+}
+
+.modal-add-candidate-icon-calendar {
+  background: url("../icons/ICON.svg") no-repeat -242px -658px;
+  width: 16px;
+  height: 16px;
+}
+
+.modal-add-candidate-icon-dropdown {
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M11 6.6L8.354 9.25C8.308 9.297 8.252 9.333 8.192 9.359C8.131 9.384 8.066 9.397 8 9.397C7.934 9.397 7.869 9.384 7.808 9.359C7.748 9.333 7.692 9.297 7.646 9.25L5 6.6' stroke='%237A8188' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.modal-add-candidate-icon-plus {
+  background: url("../icons/icon-plus-blue.svg") no-repeat;
+  background-size: contain;
+  width: 14px;
+  height: 14px;
+}
