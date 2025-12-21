@@ -25,10 +25,11 @@ import { ref } from 'vue'
 import LogoIndex from '@/components/layout/LogoIndex.vue'
 import SearchBox from '@/components/layout/SearchBox.vue'
 import UserMenu from '@/components/layout/UserMenu.vue'
+import AvatarImage from '@/assets/images/avatar.jpg'
 
 const appTitle = ref('Recruitment')
 const searchQuery = ref('')
-const userAvatar = ref('../assets/images/avatar.jpg')
+const userAvatar = ref(AvatarImage)
 
 const headerIcons = ref([
   { name: 'notification', class: 'icon-notification-version-header-right' },
