@@ -5,51 +5,29 @@
     <div class="content-header commons-flex-between">
       <h1 class="page-title commons-fs-20 commons-fw-700">Candidates</h1>
       <div class="header-actions commons-display-flex">
-        <button
-          class="btn-add-candidate commons-flex-center commons-color-white commons-border-none commons-fs-14 commons-fw-500 commons-pointer commons-transition-bg"
-        >
-          <span class="btn-icon icon-add-candidate"></span>
-          <span>Add candidate</span>
-        </button>
-        <button
-          class="btn-dropdown commons-flex-center-all commons-color-white commons-border-none commons-pointer commons-transition-bg"
-        >
-          <span class="dropdown-icon icon-down"></span>
-        </button>
+        <BaseButton
+          text="Add candidate"
+          icon="icon-add-candidate"
+          variant="primary"
+          custom-class="btn-add-candidate"
+          @click="openAddCandidateModal"
+        />
+        <BaseButton icon="icon-down" variant="primary" custom-class="btn-dropdown" />
       </div>
     </div>
 
     <!-- Filter Section -->
     <div class="filter-section commons-flex-between commons-bg-white">
-      <div class="search-box commons-flex-center commons-rounded-4 commons-bg-white">
-        <span class="icon-ai-search-candidate"></span>
-        <input
-          type="text"
-          placeholder="Quick Search or AI Assistant"
-          class="filter-search-input commons-flex-1 commons-border-none commons-outline-none commons-fs-14"
-        />
-      </div>
+      <BaseInput
+        placeholder="Quick Search or AI Assistant"
+        icon="icon-ai-search-candidate"
+        wrapper-class="search-box commons-bg-white"
+      />
       <div class="filter-actions commons-display-flex">
-        <button
-          class="filter-btn commons-flex-center-all commons-rounded-4 commons-bg-white commons-pointer commons-transition-bg"
-        >
-          <span class="icon-filter"></span>
-        </button>
-        <button
-          class="filter-btn commons-flex-center-all commons-rounded-4 commons-bg-white commons-pointer commons-transition-bg"
-        >
-          <span class="icon-export"></span>
-        </button>
-        <button
-          class="filter-btn commons-flex-center-all commons-rounded-4 commons-bg-white commons-pointer commons-transition-bg"
-        >
-          <span class="icon-interactive-history"></span>
-        </button>
-        <button
-          class="filter-btn commons-flex-center-all commons-rounded-4 commons-bg-white commons-pointer commons-transition-bg"
-        >
-          <span class="icon-setting-column"></span>
-        </button>
+        <BaseButton icon="icon-filter" variant="secondary" custom-class="filter-btn" />
+        <BaseButton icon="icon-export" variant="secondary" custom-class="filter-btn" />
+        <BaseButton icon="icon-interactive-history" variant="secondary" custom-class="filter-btn" />
+        <BaseButton icon="icon-setting-column" variant="secondary" custom-class="filter-btn" />
       </div>
     </div>
 
@@ -62,36 +40,31 @@
         <a class="selection-select-all commons-pointer commons-fs-14">Select all on the list</a>
       </div>
       <div class="selection-actions commons-flex-center">
-        <button
-          class="toolbar-btn commons-flex-center commons-pointer commons-border-none commons-bg-transparent"
-        >
-          <span class="icon-email"></span>
-          <span class="commons-fs-14">Send email</span>
-        </button>
-        <button
-          class="toolbar-btn commons-flex-center commons-pointer commons-border-none commons-bg-transparent"
-        >
-          <span class="icon-tag"></span>
-          <span class="commons-fs-14">Manage tag</span>
-        </button>
-        <button
-          class="toolbar-btn commons-flex-center commons-pointer commons-border-none commons-bg-transparent"
-        >
-          <span class="icon-task"></span>
-          <span class="commons-fs-14">Create task</span>
-        </button>
-        <button
-          class="toolbar-btn commons-flex-center commons-pointer commons-border-none commons-bg-transparent"
-        >
-          <span class="icon-campaign"></span>
-          <span class="commons-fs-14">Add to campaign</span>
-        </button>
-        <button
-          class="toolbar-btn toolbar-btn-delete commons-flex-center commons-pointer commons-border-none commons-bg-transparent"
-        >
-          <span class="icon-delete" style="width: 20px; height: 20px"></span>
-          <span class="commons-fs-14">Delete</span>
-        </button>
+        <BaseButton
+          text="Send email"
+          icon="icon-email"
+          variant="ghost"
+          custom-class="toolbar-btn"
+        />
+        <BaseButton text="Manage tag" icon="icon-tag" variant="ghost" custom-class="toolbar-btn" />
+        <BaseButton
+          text="Create task"
+          icon="icon-task"
+          variant="ghost"
+          custom-class="toolbar-btn"
+        />
+        <BaseButton
+          text="Add to campaign"
+          icon="icon-campaign"
+          variant="ghost"
+          custom-class="toolbar-btn"
+        />
+        <BaseButton
+          text="Delete"
+          icon="icon-delete"
+          variant="ghost"
+          custom-class="toolbar-btn toolbar-btn-delete"
+        />
       </div>
     </div>
 
@@ -99,119 +72,145 @@
     <div class="table-container commons-flex-1 commons-overflow-hidden commons-flex-col">
       <div class="table-wrapper commons-flex-1 commons-overflow-auto">
         <table class="candidates-table commons-w-full commons-fs-14">
-          <thead>
-            <tr>
-              <th class="col-checkbox"><input type="checkbox" /></th>
-              <th class="col-fullname commons-fw-700 commons-text-left commons-text-nowrap">
-                Full name
-              </th>
-              <th class="col-email commons-fw-700 commons-text-left commons-text-nowrap">Email</th>
-              <th class="col-phone commons-fw-700 commons-text-left commons-text-nowrap">
-                Phone number
-              </th>
-              <th class="col-campaign commons-fw-700 commons-text-left commons-text-nowrap">
-                Recruitment campaign
-              </th>
-              <th class="col-position commons-fw-700 commons-text-left commons-text-nowrap">
-                Recruiting position
-              </th>
-              <th class="col-jobs commons-fw-700 commons-text-left commons-text-nowrap">Jobs</th>
-              <th class="col-round commons-fw-700 commons-text-left commons-text-nowrap">
-                Recruitment round
-              </th>
-              <th class="col-review commons-fw-700 commons-text-left commons-text-nowrap">
-                Review
-              </th>
-              <th class="col-appdate commons-fw-700 commons-text-left commons-text-nowrap">
-                Application date
-              </th>
-              <th class="col-source commons-fw-700 commons-text-left commons-text-nowrap">
-                Candidate source
-              </th>
-              <th class="col-training commons-fw-700 commons-text-left commons-text-nowrap">
-                Training level
-              </th>
-              <th class="col-place commons-fw-700 commons-text-left commons-text-nowrap">
-                Training place
-              </th>
-              <th class="col-major commons-fw-700 commons-text-left commons-text-nowrap">Major</th>
-              <th class="col-workplace commons-fw-700 commons-text-left commons-text-nowrap">
-                Recent Workplace
-              </th>
-              <th class="col-recommend commons-fw-700 commons-text-left commons-text-nowrap">
-                Recommending staff
-              </th>
-              <th class="col-department commons-fw-700 commons-text-left commons-text-nowrap">
-                Using department
-              </th>
-              <th class="col-compat commons-fw-700 commons-text-left commons-text-nowrap">
-                Compatibility level
-              </th>
-              <th class="col-area commons-fw-700 commons-text-left commons-text-nowrap">Area</th>
-              <th class="col-referral commons-fw-700 commons-text-left commons-text-nowrap">
-                Referral
-              </th>
-              <th class="col-receipt commons-fw-700 commons-text-left commons-text-nowrap">
-                Receipt information
-              </th>
-              <th class="col-talent commons-fw-700 commons-text-left commons-text-nowrap">
-                In talent pool
-              </th>
-              <th class="col-portal commons-fw-700 commons-text-left commons-text-nowrap">
-                Candidate portal account
-              </th>
-              <th class="col-tag commons-fw-700 commons-text-left commons-text-nowrap">Tag</th>
-              <th class="col-status commons-fw-700 commons-text-left commons-text-nowrap">
-                Status
-              </th>
-              <th class="col-sex commons-fw-700 commons-text-left commons-text-nowrap">Sex</th>
-              <th class="col-dob commons-fw-700 commons-text-left commons-text-nowrap">
-                Date of birth
-              </th>
-              <th class="col-address commons-fw-700 commons-text-left commons-text-nowrap">
-                Address
-              </th>
-              <th class="col-reason commons-fw-700 commons-text-left commons-text-nowrap">
-                Reason
-              </th>
-              <th class="col-collab commons-fw-700 commons-text-left commons-text-nowrap">
-                Collaborators
-              </th>
-              <th class="col-receiptdate commons-fw-700 commons-text-left commons-text-nowrap">
-                Receipt date
-              </th>
-              <th class="col-offer commons-fw-700 commons-text-left commons-text-nowrap">
-                Job offer status
-              </th>
-              <th class="col-actions"></th>
-            </tr>
-          </thead>
-          <tbody></tbody>
+          <TableHeader :columns="columns" @select-all="handleSelectAll" />
+          <tbody>
+            <TableRow
+              v-for="candidate in candidates"
+              :key="candidate.id"
+              :item="candidate"
+              :columns="columns"
+              :is-selected="selectedCandidates.includes(candidate.id)"
+              @toggle-select="handleToggleSelect"
+              @edit="handleEdit"
+              @delete="handleDelete"
+            />
+          </tbody>
         </table>
       </div>
     </div>
 
     <!-- Pagination Section -->
-    <div class="pagination-section commons-flex-between">
-      <div class="total-records commons-fs-14">Total: <strong>0</strong> record</div>
-      <div class="pagination-controls commons-flex-center">
-        <span class="records-label commons-fs-14">Number of records/page</span>
-        <select class="records-select commons-rounded-4 commons-fs-14 commons-pointer">
-          <option value="25">25</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </select>
-        <span class="page-info commons-fs-14">1 - 2 record</span>
-        <button
-          class="page-btn prev commons-border-none commons-flex-center-all commons-fs-16"
-          disabled
-        >
-          <div class="icon-left"></div>
-        </button>
-        <button class="page-btn next commons-border-none commons-flex-center-all commons-fs-16">
-          <div class="icon-right"></div>
-        </button>
-      </div>
-    </div>
+    <TablePagination
+      :total-records="totalRecords"
+      v-model:page-size="pageSize"
+      :current-page="currentPage"
+      @prev-page="handlePrevPage"
+      @next-page="handleNextPage"
+    />
+
+    <!-- Add Candidate Modal -->
+    <CandidateForm
+      v-if="showAddCandidateModal"
+      @close="closeAddCandidateModal"
+      @save="handleSaveCandidate"
+    />
   </div>
 </template>
+
+<script setup>
+import { ref } from 'vue'
+import BaseButton from '@/components/common/BaseButton.vue'
+import BaseInput from '@/components/common/BaseInput.vue'
+import TableHeader from '@/components/table/TableHeader.vue'
+import TableRow from '@/components/table/TableRow.vue'
+import TablePagination from '@/components/table/TablePagination.vue'
+import CandidateForm from './CandidateForm.vue'
+
+const showAddCandidateModal = ref(false)
+const candidates = ref([])
+const selectedCandidates = ref([])
+const totalRecords = ref(0)
+const pageSize = ref(25)
+const currentPage = ref(1)
+
+const columns = [
+  { key: 'fullName', label: 'Full name', class: 'col-fullname' },
+  { key: 'email', label: 'Email', class: 'col-email' },
+  { key: 'phone', label: 'Phone number', class: 'col-phone' },
+  { key: 'campaign', label: 'Recruitment campaign', class: 'col-campaign' },
+  { key: 'position', label: 'Recruiting position', class: 'col-position' },
+  { key: 'jobs', label: 'Jobs', class: 'col-jobs' },
+  { key: 'round', label: 'Recruitment round', class: 'col-round' },
+  { key: 'review', label: 'Review', class: 'col-review' },
+  { key: 'appDate', label: 'Application date', class: 'col-appdate' },
+  { key: 'source', label: 'Candidate source', class: 'col-source' },
+  { key: 'training', label: 'Training level', class: 'col-training' },
+  { key: 'place', label: 'Training place', class: 'col-place' },
+  { key: 'major', label: 'Major', class: 'col-major' },
+  { key: 'workplace', label: 'Recent Workplace', class: 'col-workplace' },
+  { key: 'recommend', label: 'Recommending staff', class: 'col-recommend' },
+  { key: 'department', label: 'Using department', class: 'col-department' },
+  { key: 'compat', label: 'Compatibility level', class: 'col-compat' },
+  { key: 'area', label: 'Area', class: 'col-area' },
+  { key: 'referral', label: 'Referral', class: 'col-referral' },
+  { key: 'receipt', label: 'Receipt information', class: 'col-receipt' },
+  { key: 'talent', label: 'In talent pool', class: 'col-talent' },
+  { key: 'portal', label: 'Candidate portal account', class: 'col-portal' },
+  { key: 'tag', label: 'Tag', class: 'col-tag' },
+  { key: 'status', label: 'Status', class: 'col-status' },
+  { key: 'sex', label: 'Sex', class: 'col-sex' },
+  { key: 'dob', label: 'Date of birth', class: 'col-dob' },
+  { key: 'address', label: 'Address', class: 'col-address' },
+  { key: 'reason', label: 'Reason', class: 'col-reason' },
+  { key: 'collab', label: 'Collaborators', class: 'col-collab' },
+  { key: 'receiptDate', label: 'Receipt date', class: 'col-receiptdate' },
+  { key: 'offer', label: 'Job offer status', class: 'col-offer' },
+]
+
+const handleSelectAll = (checked) => {
+  if (checked) {
+    selectedCandidates.value = candidates.value.map((c) => c.id)
+  } else {
+    selectedCandidates.value = []
+  }
+}
+
+const handleToggleSelect = (item) => {
+  const index = selectedCandidates.value.indexOf(item.id)
+  if (index === -1) {
+    selectedCandidates.value.push(item.id)
+  } else {
+    selectedCandidates.value.splice(index, 1)
+  }
+}
+
+const handleEdit = (item) => {
+  console.log('Edit', item)
+}
+
+const handleDelete = (item) => {
+  console.log('Delete', item)
+}
+
+const handlePrevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--
+  }
+}
+
+const handleNextPage = () => {
+  currentPage.value++
+}
+
+const openAddCandidateModal = () => {
+  showAddCandidateModal.value = true
+}
+
+const closeAddCandidateModal = () => {
+  showAddCandidateModal.value = false
+}
+
+const handleSaveCandidate = (formData) => {
+  const newCandidate = {
+    id: Date.now(),
+    ...formData,
+    appDate: formData.applicationDate,
+    source: formData.candidateSource,
+    status: 'Pending',
+  }
+
+  candidates.value.unshift(newCandidate)
+  totalRecords.value++
+  console.log('Saved candidate:', newCandidate)
+}
+</script>
