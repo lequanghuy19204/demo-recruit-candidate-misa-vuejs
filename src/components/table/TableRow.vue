@@ -11,13 +11,13 @@
     <td class="col-actions">
       <div class="action-buttons commons-flex-center">
         <button
-          class="action-btn edit-btn commons-border-none commons-bg-transparent commons-pointer"
+          class="action-btn-edit commons-border-none commons-bg-transparent commons-pointer"
           @click="$emit('edit', item)"
         >
           <span class="icon-edit"></span>
         </button>
         <button
-          class="action-btn delete-btn commons-border-none commons-bg-transparent commons-pointer"
+          class="action-btn-delete commons-border-none commons-bg-transparent commons-pointer"
           @click="$emit('delete', item)"
         >
           <span class="icon-delete"></span>
@@ -45,19 +45,3 @@ defineProps({
 
 defineEmits(['toggle-select', 'edit', 'delete'])
 </script>
-
-<style scoped>
-.action-buttons {
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-tr:hover .action-buttons {
-  opacity: 1;
-}
-
-.action-btn {
-  padding: 4px;
-  margin: 0 2px;
-}
-</style>
