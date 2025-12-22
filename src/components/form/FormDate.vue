@@ -10,13 +10,17 @@
     </label>
     <div class="modal-add-candidate-date-input commons-w-full commons-flex-center commons-bg-white">
       <input
+        ref="dateInput"
         type="date"
         :value="modelValue"
         :placeholder="placeholder"
         class="commons-flex-1 commons-border-none commons-fs-14 commons-color-primary commons-outline-none commons-bg-transparent"
         @input="$emit('update:modelValue', $event.target.value)"
       />
-      <div class="modal-add-candidate-date-input-icon commons-flex-center-all commons-pointer">
+      <div
+        class="modal-add-candidate-date-input-icon commons-flex-center-all commons-pointer"
+        @click="openDatePicker"
+      >
         <span class="modal-add-candidate-icon-calendar"></span>
       </div>
     </div>
@@ -25,6 +29,8 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 defineProps({
   modelValue: {
     type: String,
@@ -53,4 +59,12 @@ defineProps({
 })
 
 defineEmits(['update:modelValue'])
+
+const dateInput = ref(null)
+
+const openDatePicker = () => {
+  if (dateInput.value) {
+    dateInput.value.showPicker()
+  }
+}
 </script>

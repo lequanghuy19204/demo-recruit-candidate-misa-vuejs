@@ -16,9 +16,13 @@
       </div>
     </div>
 
-    <!-- Filter Section -->
-    <div class="filter-section commons-flex-between commons-bg-white">
+    <!-- Filter Section - Show when no candidates selected -->
+    <div
+      v-if="selectedCandidates.length === 0"
+      class="filter-section commons-flex-between commons-bg-white"
+    >
       <BaseInput
+        v-model="searchQuery"
         placeholder="Quick Search or AI Assistant"
         icon="icon-ai-search-candidate"
         wrapper-class="search-box commons-bg-white"
@@ -31,13 +35,20 @@
       </div>
     </div>
 
-    <!-- Selection Toolbar (hidden by default) -->
-    <div class="selection-toolbar commons-flex-between commons-bg-white">
+    <!-- Selection Toolbar - Show when candidates selected -->
+    <div
+      v-if="selectedCandidates.length > 0"
+      class="selection-toolbar commons-flex-between commons-bg-white"
+    >
       <div class="selection-info commons-flex-center">
-        <span class="selection-count commons-fw-700">0</span>
+        <span class="selection-count commons-fw-700">{{ selectedCandidates.length }}</span>
         <span class="selection-text commons-fs-14">selecting</span>
-        <a class="selection-deselect commons-pointer commons-fs-14">Deselect</a>
-        <a class="selection-select-all commons-pointer commons-fs-14">Select all on the list</a>
+        <a class="selection-deselect commons-pointer commons-fs-14" @click="handleDeselectAll"
+          >Deselect</a
+        >
+        <a class="selection-select-all commons-pointer commons-fs-14" @click="handleSelectAllOnList"
+          >Select all on the list</a
+        >
       </div>
       <div class="selection-actions commons-flex-center">
         <BaseButton
@@ -61,9 +72,10 @@
         />
         <BaseButton
           text="Delete"
-          icon="icon-delete"
+          icon="icon-delete-20"
           variant="ghost"
           custom-class="toolbar-btn toolbar-btn-delete"
+          @click="handleDeleteSelected"
         />
       </div>
     </div>
@@ -75,7 +87,7 @@
           <TableHeader :columns="columns" @select-all="handleSelectAll" />
           <tbody>
             <TableRow
-              v-for="candidate in candidates"
+              v-for="candidate in filteredCandidates"
               :key="candidate.id"
               :item="candidate"
               :columns="columns"
@@ -91,7 +103,7 @@
 
     <!-- Pagination Section -->
     <TablePagination
-      :total-records="totalRecords"
+      :total-records="filteredCandidates.length"
       v-model:page-size="pageSize"
       :current-page="currentPage"
       @prev-page="handlePrevPage"
@@ -101,6 +113,8 @@
     <!-- Add Candidate Modal -->
     <CandidateForm
       v-if="showAddCandidateModal"
+      :candidate="editingCandidate"
+      :is-edit-mode="isEditMode"
       @close="closeAddCandidateModal"
       @save="handleSaveCandidate"
     />
@@ -108,20 +122,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import BaseButton from '@/components/common/BaseButton.vue'
 import BaseInput from '@/components/common/BaseInput.vue'
 import TableHeader from '@/components/table/TableHeader.vue'
 import TableRow from '@/components/table/TableRow.vue'
 import TablePagination from '@/components/table/TablePagination.vue'
 import CandidateForm from './CandidateForm.vue'
+import {
+  getCandidatesFromStorage,
+  addCandidateToStorage,
+  updateCandidateInStorage,
+  deleteCandidateFromStorage,
+} from '@/utils/localStorage'
 
 const showAddCandidateModal = ref(false)
 const candidates = ref([])
 const selectedCandidates = ref([])
+const searchQuery = ref('')
 const totalRecords = ref(0)
 const pageSize = ref(25)
 const currentPage = ref(1)
+const editingCandidate = ref(null)
+const isEditMode = ref(false)
 
 const columns = [
   { key: 'fullName', label: 'Full name', class: 'col-fullname' },
@@ -157,9 +180,35 @@ const columns = [
   { key: 'offer', label: 'Job offer status', class: 'col-offer' },
 ]
 
+// Filter candidates based on search query across all columns
+const filteredCandidates = computed(() => {
+  if (!searchQuery.value.trim()) {
+    return candidates.value
+  }
+
+  const query = searchQuery.value.toLowerCase().trim()
+
+  return candidates.value.filter((candidate) => {
+    // Search across all column values
+    return Object.values(candidate).some((value) => {
+      if (value == null) return false
+      return String(value).toLowerCase().includes(query)
+    })
+  })
+})
+
+onMounted(() => {
+  loadCandidates()
+})
+
+const loadCandidates = () => {
+  candidates.value = getCandidatesFromStorage()
+  totalRecords.value = candidates.value.length
+}
+
 const handleSelectAll = (checked) => {
   if (checked) {
-    selectedCandidates.value = candidates.value.map((c) => c.id)
+    selectedCandidates.value = filteredCandidates.value.map((c) => c.id)
   } else {
     selectedCandidates.value = []
   }
@@ -175,11 +224,56 @@ const handleToggleSelect = (item) => {
 }
 
 const handleEdit = (item) => {
-  console.log('Edit', item)
+  editingCandidate.value = {
+    ...item,
+    dateOfBirth: item.dob,
+    applicationDate: item.appDate,
+    gender: item.sex,
+    candidateSource: item.source,
+    jobPosition: item.position,
+    recentWorkplace: item.workplace,
+    recommendingStaff: item.recommend,
+    collaborators: item.collab,
+    trainingLevel: item.training,
+    trainingPlace: item.place,
+    major: item.major,
+  }
+  isEditMode.value = true
+  showAddCandidateModal.value = true
 }
 
 const handleDelete = (item) => {
-  console.log('Delete', item)
+  if (confirm(`Are you sure you want to delete the candidate "${item.fullName}"?`)) {
+    deleteCandidateFromStorage(item.id)
+    // Remove from selected if it was selected
+    const index = selectedCandidates.value.indexOf(item.id)
+    if (index !== -1) {
+      selectedCandidates.value.splice(index, 1)
+    }
+    loadCandidates()
+    console.log('Deleted candidate:', item)
+  }
+}
+
+const handleDeselectAll = () => {
+  selectedCandidates.value = []
+}
+
+const handleSelectAllOnList = () => {
+  selectedCandidates.value = filteredCandidates.value.map((c) => c.id)
+}
+
+const handleDeleteSelected = () => {
+  if (selectedCandidates.value.length === 0) return
+
+  const count = selectedCandidates.value.length
+  if (confirm(`Are you sure you want to delete ${count} selected candidate(s)?`)) {
+    selectedCandidates.value.forEach((id) => {
+      deleteCandidateFromStorage(id)
+    })
+    selectedCandidates.value = []
+    loadCandidates()
+  }
 }
 
 const handlePrevPage = () => {
@@ -193,6 +287,8 @@ const handleNextPage = () => {
 }
 
 const openAddCandidateModal = () => {
+  editingCandidate.value = null
+  isEditMode.value = false
   showAddCandidateModal.value = true
 }
 
@@ -201,16 +297,50 @@ const closeAddCandidateModal = () => {
 }
 
 const handleSaveCandidate = (formData) => {
-  const newCandidate = {
-    id: Date.now(),
-    ...formData,
+  const candidateData = {
+    fullName: formData.fullName,
+    email: formData.email,
+    phone: formData.phone,
+    campaign: '',
+    position: formData.jobPosition,
+    jobs: '',
+    round: '',
+    review: '',
     appDate: formData.applicationDate,
     source: formData.candidateSource,
+    training: formData.trainingLevel,
+    place: formData.trainingPlace,
+    major: formData.major,
+    workplace: formData.recentWorkplace,
+    recommend: formData.recommendingStaff,
+    department: '',
+    compat: '',
+    area: formData.area,
+    referral: '',
+    receipt: '',
+    talent: '',
+    portal: '',
+    tag: '',
     status: 'Pending',
+    sex: formData.gender,
+    dob: formData.dateOfBirth,
+    address: formData.address,
+    reason: '',
+    collab: formData.collaborators,
+    receiptDate: '',
+    offer: '',
+    timeFrom: formData.timeFrom,
+    timeTo: formData.timeTo,
+    taskDescription: formData.taskDescription,
+    cvFile: formData.cvFile,
   }
 
-  candidates.value.unshift(newCandidate)
-  totalRecords.value++
-  console.log('Saved candidate:', newCandidate)
+  if (isEditMode.value && formData.id) {
+    updateCandidateInStorage(formData.id, candidateData)
+  } else {
+    addCandidateToStorage(candidateData)
+  }
+
+  loadCandidates()
 }
 </script>

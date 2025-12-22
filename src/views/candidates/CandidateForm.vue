@@ -7,7 +7,9 @@
   >
     <div class="modal-add-candidate commons-flex-col commons-rounded-4 commons-bg-white">
       <div class="modal-add-candidate-header commons-flex-between">
-        <h2 class="modal-add-candidate-title commons-fw-700">Add candidate</h2>
+        <h2 class="modal-add-candidate-title commons-fw-700">
+          {{ isEditMode ? 'Edit candidate' : 'Add candidate' }}
+        </h2>
         <button
           class="modal-add-candidate-close commons-relative commons-flex-center-all commons-border-none commons-pointer"
           id="closeModalAddCandidate"
@@ -322,29 +324,44 @@ import FileUpload from '@/components/form/FileUpload.vue'
 
 const emit = defineEmits(['close', 'save'])
 
-const formData = reactive({
-  fullName: '',
-  dateOfBirth: '',
-  gender: '',
-  area: '',
-  phone: '',
-  email: '',
-  address: '',
-  trainingLevel: '',
-  trainingPlace: '',
-  major: '',
-  applicationDate: '',
-  candidateSource: '',
-  recommendingStaff: '',
-  collaborators: '',
-  recentWorkplace: '',
-  workplace: '',
-  timeFrom: '',
-  timeTo: '',
-  jobPosition: '',
-  taskDescription: '',
-  cvFile: null,
+const props = defineProps({
+  candidate: {
+    type: Object,
+    defaule: null,
+  },
+  isEditMode: {
+    type: Boolean,
+    defaule: false,
+  },
 })
+
+const formData = reactive(
+  props.candidate
+    ? { ...props.candidate }
+    : {
+        fullName: '',
+        dateOfBirth: '',
+        gender: '',
+        area: '',
+        phone: '',
+        email: '',
+        address: '',
+        trainingLevel: '',
+        trainingPlace: '',
+        major: '',
+        applicationDate: '',
+        candidateSource: '',
+        recommendingStaff: '',
+        collaborators: '',
+        recentWorkplace: '',
+        workplace: '',
+        timeFrom: '',
+        timeTo: '',
+        jobPosition: '',
+        taskDescription: '',
+        cvFile: null,
+      },
+)
 
 const genderOptions = [
   { value: 'male', label: 'Male' },
@@ -419,7 +436,7 @@ const saveCandidate = () => {
     return
   }
 
-  emit('save', { ...formData })
+  emit('save', { ...formData, id: props.isEditMode ? props.candidate.id : undefined })
   closeModal()
 }
 </script>

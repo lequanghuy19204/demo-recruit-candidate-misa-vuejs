@@ -27,7 +27,7 @@
           v-for="option in options"
           :key="option.value"
           class="modal-add-candidate-dropdown-item"
-          :class="{ selected: option.value === modelValue }"
+          :class="{ selected: option.label === modelValue }"
           @click.stop="selectOption(option)"
         >
           {{ option.label }}
@@ -73,8 +73,8 @@ const emit = defineEmits(['update:modelValue'])
 const isOpen = ref(false)
 
 const selectedLabel = computed(() => {
-  const option = props.options.find((opt) => opt.value === props.modelValue)
-  return option ? option.label : ''
+  const option = props.options.find((opt) => opt.label === props.modelValue)
+  return option ? option.label : props.modelValue
 })
 
 const toggleDropdown = () => {
@@ -86,7 +86,7 @@ const closeDropdown = () => {
 }
 
 const selectOption = (option) => {
-  emit('update:modelValue', option.value)
+  emit('update:modelValue', option.label)
   closeDropdown()
 }
 

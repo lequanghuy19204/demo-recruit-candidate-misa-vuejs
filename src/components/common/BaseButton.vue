@@ -8,7 +8,7 @@
     :disabled="disabled"
     @click="$emit('click', $event)"
   >
-    <span v-if="icon" :class="[icon, 'btn-icon', { 'commons-ml-2': text }]"></span>
+    <span v-if="icon" :class="[icon, 'btn-icon']"></span>
     <span v-if="text" class="commons-fs-14 commons-fw-500">{{ text }}</span>
     <slot></slot>
   </button>
@@ -56,9 +56,3 @@ const variantClass = computed(() => {
   }
 })
 </script>
-
-<style scoped>
-.commons-mr-2 {
-  margin-right: 8px;
-}
-</style>

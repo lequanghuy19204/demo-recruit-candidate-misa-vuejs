@@ -241,7 +241,6 @@ html {
 
 /* Selection Toolbar */
 .selection-toolbar {
-  display: none;
   padding: 15px;
   min-height: 64px;
   border-bottom: 1px solid #e0e6ec;
