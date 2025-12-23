@@ -81,34 +81,31 @@
     </div>
 
     <!-- Table Section -->
-    <div class="table-container commons-flex-1 commons-overflow-hidden commons-flex-col">
-      <div class="table-wrapper commons-flex-1 commons-overflow-auto">
-        <table class="candidates-table commons-w-full commons-fs-14">
-          <TableHeader :columns="columns" @select-all="handleSelectAll" />
-          <tbody>
-            <TableRow
-              v-for="candidate in filteredCandidates"
-              :key="candidate.id"
-              :item="candidate"
-              :columns="columns"
-              :is-selected="selectedCandidates.includes(candidate.id)"
-              @toggle-select="handleToggleSelect"
-              @edit="handleEdit"
-              @delete="handleDelete"
-            />
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Pagination Section -->
-    <TablePagination
-      :total-records="filteredCandidates.length"
+    <MsTable
+      :data="filteredCandidates"
+      :columns="columns"
+      :selectable="true"
+      :selected-items="selectedCandidates"
+      :show-actions="true"
+      :show-edit="true"
+      :show-delete="true"
+      :show-pagination="true"
       v-model:page-size="pageSize"
-      :current-page="currentPage"
-      @prev-page="handlePrevPage"
-      @next-page="handleNextPage"
-    />
+      v-model:current-page="currentPage"
+      @select-all="handleSelectAll"
+      @toggle-select="handleToggleSelect"
+      @edit="handleEdit"
+      @delete="handleDelete"
+    >
+      <template #fullName="{ item }">
+        <div class="candidate-name-cell">
+          <div class="candidate-avatar" :style="{ backgroundColor: getAvatarColor(item.fullName) }">
+            <span class="candidate-avatar-initials">{{ getInitials(item.fullName) }}</span>
+          </div>
+          <span>{{ item.fullName }}</span>
+        </div>
+      </template>
+    </MsTable>
 
     <!-- Add Candidate Modal -->
     <CandidateForm
@@ -125,9 +122,7 @@
 import { ref, computed, onMounted } from 'vue'
 import BaseButton from '@/components/common/BaseButton.vue'
 import BaseInput from '@/components/common/BaseInput.vue'
-import TableHeader from '@/components/table/TableHeader.vue'
-import TableRow from '@/components/table/TableRow.vue'
-import TablePagination from '@/components/table/TablePagination.vue'
+import MsTable from '@/components/table/MsTable.vue'
 import CandidateForm from './CandidateForm.vue'
 import {
   getCandidatesFromStorage,
@@ -276,16 +271,6 @@ const handleDeleteSelected = () => {
   }
 }
 
-const handlePrevPage = () => {
-  if (currentPage.value > 1) {
-    currentPage.value--
-  }
-}
-
-const handleNextPage = () => {
-  currentPage.value++
-}
-
 const openAddCandidateModal = () => {
   editingCandidate.value = null
   isEditMode.value = false
@@ -342,5 +327,48 @@ const handleSaveCandidate = (formData) => {
   }
 
   loadCandidates()
+}
+
+const getInitials = (fullName) => {
+  if (!fullName) return ''
+  const names = fullName.trim().split(' ')
+  if (names.length === 1) {
+    return names[0].charAt(0).toUpperCase()
+  }
+  return names[0].charAt(0).toUpperCase() + names[names.length - 1].charAt(0).toUpperCase()
+}
+
+const getAvatarColor = (fullName) => {
+  if (!fullName) return '#6c757d'
+
+  const colors = [
+    '#f44336',
+    '#e91e63',
+    '#9c27b0',
+    '#673ab7',
+    '#3f51b5',
+    '#2196f3',
+    '#03a9f4',
+    '#00bcd4',
+    '#009688',
+    '#4caf50',
+    '#8bc34a',
+    '#cddc39',
+    '#ffeb3b',
+    '#ffc107',
+    '#ff9800',
+    '#ff5722',
+    '#795548',
+    '#9e9e9e',
+    '#607d8b',
+    '#2680eb',
+  ]
+
+  let hash = 0
+  for (let i = 0; i < fullName.length; i++) {
+    hash = fullName.charCodeAt(i) + ((hash << 5) - hash)
+  }
+
+  return colors[Math.abs(hash) % colors.length]
 }
 </script>
