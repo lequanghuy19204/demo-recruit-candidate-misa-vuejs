@@ -99,8 +99,8 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
-import BaseButton from '@/components/common/BaseButton.vue'
-import BaseSelect from '@/components/common/BaseSelect.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
+import BaseSelect from '@/components/base/BaseSelect.vue'
 
 const props = defineProps({
   data: {

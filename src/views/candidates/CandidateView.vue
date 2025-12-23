@@ -120,8 +120,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import BaseButton from '@/components/common/BaseButton.vue'
-import BaseInput from '@/components/common/BaseInput.vue'
+import BaseButton from '@/components/base/BaseButton.vue'
+import BaseInput from '@/components/base/BaseInput.vue'
 import MsTable from '@/components/table/MsTable.vue'
 import CandidateForm from './CandidateForm.vue'
 import {

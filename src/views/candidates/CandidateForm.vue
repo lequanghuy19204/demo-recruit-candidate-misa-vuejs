@@ -18,7 +18,7 @@
       </div>
 
       <div class="modal-add-candidate-body commons-flex-1">
-        <FileUpload @file-selected="handleFileSelected" />
+        <BaseFileUpload @file-selected="handleFileSelected" />
         <div class="modal-add-candidate-form commons-display-flex">
           <div
             class="modal-add-candidate-avatar commons-rounded-full commons-flex-center-all commons-flex-shrink-0 commons-pointer"
@@ -27,7 +27,7 @@
           </div>
 
           <div class="modal-add-candidate-fields commons-flex-1 commons-flex-col">
-            <FormInput
+            <BaseInput
               v-model="formData.fullName"
               label="Full name"
               placeholder="Enter full name"
@@ -52,10 +52,10 @@
             </div>
             <div class="modal-add-candidate-row commons-display-flex">
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormDate v-model="formData.dateOfBirth" placeholder="dd/MM/yyyy" />
+                <BaseDateInput v-model="formData.dateOfBirth" placeholder="dd/MM/yyyy" />
               </div>
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormSelect
+                <BaseSelect
                   v-model="formData.gender"
                   :options="genderOptions"
                   placeholder="Choose gender"
@@ -63,7 +63,7 @@
               </div>
             </div>
 
-            <FormSelect
+            <BaseSelect
               v-model="formData.area"
               label="Area"
               :options="areaOptions"
@@ -86,10 +86,10 @@
             </div>
             <div class="modal-add-candidate-row commons-display-flex">
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormInput v-model="formData.phone" placeholder="Enter phone number" id="phone" />
+                <BaseInput v-model="formData.phone" placeholder="Enter phone number" id="phone" />
               </div>
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormInput
+                <BaseInput
                   v-model="formData.email"
                   type="email"
                   placeholder="Enter email"
@@ -98,7 +98,7 @@
               </div>
             </div>
 
-            <FormInput
+            <BaseInput
               v-model="formData.address"
               label="Address"
               placeholder="Enter address"
@@ -120,7 +120,7 @@
                   <div
                     class="modal-add-candidate-education-item-input commons-flex-1 commons-display-flex"
                   >
-                    <FormSelect
+                    <BaseSelect
                       v-model="formData.trainingLevel"
                       :options="trainingLevelOptions"
                       placeholder="Please enter training level"
@@ -136,7 +136,7 @@
                   <div
                     class="modal-add-candidate-education-item-input commons-flex-1 commons-display-flex"
                   >
-                    <FormSelect
+                    <BaseSelect
                       v-model="formData.trainingPlace"
                       :options="trainingPlaceOptions"
                       placeholder="Please enter training place"
@@ -152,7 +152,7 @@
                   <div
                     class="modal-add-candidate-education-item-input commons-flex-1 commons-display-flex"
                   >
-                    <FormSelect
+                    <BaseSelect
                       v-model="formData.major"
                       :options="majorOptions"
                       placeholder="Enter major"
@@ -180,10 +180,10 @@
             </div>
             <div class="modal-add-candidate-row commons-display-flex">
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormDate v-model="formData.applicationDate" placeholder="dd/MM/yyyy" />
+                <BaseDateInput v-model="formData.applicationDate" placeholder="dd/MM/yyyy" />
               </div>
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormSelect
+                <BaseSelect
                   v-model="formData.candidateSource"
                   :options="sourceOptions"
                   placeholder="Select source"
@@ -207,14 +207,14 @@
             </div>
             <div class="modal-add-candidate-row commons-display-flex">
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormSelect
+                <BaseSelect
                   v-model="formData.recommendingStaff"
                   :options="staffOptions"
                   placeholder="Select staff"
                 />
               </div>
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormSelect
+                <BaseSelect
                   v-model="formData.collaborators"
                   :options="staffOptions"
                   placeholder="Select collaborators"
@@ -238,14 +238,14 @@
             </div>
             <div class="modal-add-candidate-row commons-display-flex">
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormInput
+                <BaseInput
                   v-model="formData.recentWorkplace"
                   placeholder="Enter recent workplace"
                   id="recentWorkplace"
                 />
               </div>
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormInput
+                <BaseInput
                   v-model="formData.workplace"
                   placeholder="Enter workplace"
                   id="workplace"
@@ -270,21 +270,21 @@
             </div>
             <div class="modal-add-candidate-row commons-display-flex">
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormDate v-model="formData.timeFrom" placeholder="dd/MM/yyyy" />
+                <BaseDateInput v-model="formData.timeFrom" placeholder="dd/MM/yyyy" />
               </div>
               <div class="modal-add-candidate-row-item commons-flex-1">
-                <FormDate v-model="formData.timeTo" placeholder="dd/MM/yyyy" />
+                <BaseDateInput v-model="formData.timeTo" placeholder="dd/MM/yyyy" />
               </div>
             </div>
 
-            <FormInput
+            <BaseInput
               v-model="formData.jobPosition"
               label="Job position"
               placeholder="Enter job position"
               id="jobPosition"
             />
 
-            <FormTextarea
+            <BaseTextarea
               v-model="formData.taskDescription"
               label="Task description"
               placeholder="Enter task description"
@@ -316,11 +316,11 @@
 
 <script setup>
 import { reactive } from 'vue'
-import FormInput from '@/components/form/FormInput.vue'
-import FormSelect from '@/components/form/FormSelect.vue'
-import FormDate from '@/components/form/FormDate.vue'
-import FormTextarea from '@/components/form/FormTextarea.vue'
-import FileUpload from '@/components/form/FileUpload.vue'
+import BaseInput from '@/components/base/BaseInput.vue'
+import BaseSelect from '@/components/base/BaseSelect.vue'
+import BaseDateInput from '@/components/base/BaseDateInput.vue'
+import BaseTextarea from '@/components/base/BaseTextarea.vue'
+import BaseFileUpload from '@/components/base/BaseFileUpload.vue'
 
 const emit = defineEmits(['close', 'save'])
 
