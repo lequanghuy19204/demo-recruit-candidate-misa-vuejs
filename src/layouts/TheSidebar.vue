@@ -1,6 +1,9 @@
 <template>
   <!-- Sidebar -->
-  <div class="app-sidebar commons-h-full commons-flex-col commons-justify-between commons-relative">
+  <div
+    class="app-sidebar commons-h-full commons-flex-col commons-justify-between commons-relative"
+    :class="{ collapsed: sidebarCollapsed }"
+  >
     <div class="icon-sidebar-background sidebar-bg-image"></div>
     <div class="sidebar-menu commons-flex-1">
       <!-- Menu Item Component -->
@@ -27,7 +30,13 @@
         class="shrink-button commons-flex-center commons-rounded-4 commons-pointer commons-transition-bg-ease"
         @click="toggleSidebar"
       >
-        <span class="icon-left shrink-icon commons-flex-shrink-0"></span>
+        <span
+          :class="[
+            sidebarCollapsed ? 'icon-right' : 'icon-left',
+            'shrink-icon',
+            'commons-flex-shrink-0',
+          ]"
+        ></span>
         <span class="shrink-text commons-fs-14 commons-fw-500 commons-color-white">{{
           sidebarCollapsed ? 'Expand' : 'Shrink'
         }}</span>
