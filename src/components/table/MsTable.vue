@@ -75,6 +75,7 @@
         <BaseSelect
           :model-value="internalPageSize"
           :options="pageSizeOptions"
+          :drop-up="true"
           @update:model-value="handlePageSizeChange"
         />
         <span class="page-info commons-fs-14">{{ startRecord }} - {{ endRecord }} record</span>
@@ -216,13 +217,13 @@ const paginatedData = computed(() => {
 
 const isAllSelected = computed(() => {
   if (!props.selectable || props.data.length === 0) return false
-  return props.data.every((item) => isItemSelected(item))
+  return paginatedData.value.every((item) => isItemSelected(item))
 })
 
 const isIndeterminate = computed(() => {
   if (!props.selectable || props.data.length === 0) return false
-  const selectedCount = props.data.filter((item) => isItemSelected(item)).length
-  return selectedCount > 0 && selectedCount < props.data.length
+  const selectedCount = paginatedData.value.filter((item) => isItemSelected(item)).length
+  return selectedCount > 0 && selectedCount < paginatedData.value.length
 })
 
 const getItemKey = (item) => {
@@ -239,7 +240,7 @@ const isItemSelected = (item) => {
 }
 
 const handleSelectAll = (event) => {
-  emit('select-all', event.target.checked)
+  emit('select-all', event.target.checked, paginatedData.value)
 }
 
 const handleToggleSelect = (item) => {

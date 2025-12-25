@@ -24,7 +24,7 @@
         <span class="modal-add-candidate-icon-dropdown"></span>
       </div>
 
-      <div class="base-select-dropdown-menu">
+      <div class="base-select-dropdown-menu" :class="{ 'is-drop-up': dropUp }">
         <div
           v-for="option in options"
           :key="option.value"
@@ -71,6 +71,10 @@ const props = defineProps({
   error: {
     type: String,
     default: '',
+  },
+  dropUp: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -184,6 +188,13 @@ const vClickOutside = {
   max-height: 200px;
   overflow-y: auto;
   display: none;
+}
+
+.base-select-dropdown-menu.is-drop-up {
+  bottom: 100%;
+  top: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin-bottom: 4px;
 }
 
 .base-select-wrapper.active .base-select-dropdown-menu {

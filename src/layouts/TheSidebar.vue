@@ -15,7 +15,12 @@
         @click="handleMenuClick(item)"
       >
         <span
-          :class="['menu-icon', item.iconClass, 'commons-flex-center-all', 'commons-flex-shrink-0']"
+          :class="[
+            { 'menu-icon': item.defaultIcon !== true },
+            item.iconClass,
+            'commons-flex-center-all',
+            'commons-flex-shrink-0',
+          ]"
         ></span>
         <span
           class="menu-text commons-fs-14 commons-fw-500 commons-text-nowrap commons-text-ellipsis"
@@ -66,7 +71,12 @@ const menuItems = ref([
   { id: 'communication', text: 'Communication with candidate', iconClass: 'icon-communication' },
   { id: 'reports', text: 'Report', iconClass: 'icon-reports' },
   { id: 'settings', text: 'Settings', iconClass: 'icon-sidebar-settings' },
-  { id: 'useful-knowledge', text: 'Useful knowledge', iconClass: 'icon-knowledge-header-right' },
+  {
+    id: 'useful-knowledge',
+    text: 'Useful knowledge',
+    iconClass: 'icon-knowledge-header-right',
+    defaultIcon: true,
+  },
 ])
 
 const handleMenuClick = (item) => {

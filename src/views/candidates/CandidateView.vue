@@ -201,11 +201,21 @@ const loadCandidates = () => {
   totalRecords.value = candidates.value.length
 }
 
-const handleSelectAll = (checked) => {
+const handleSelectAll = (checked, currentItems = []) => {
   if (checked) {
-    selectedCandidates.value = filteredCandidates.value.map((c) => c.id)
+    const currentIds = currentItems.map((item) => item.id)
+    currentIds.forEach((id) => {
+      if (!selectedCandidates.value.includes(id)) {
+        selectedCandidates.value.push(id)
+      }
+    })
   } else {
-    selectedCandidates.value = []
+    if (currentItems.length > 0) {
+      const currentIds = currentItems.map((item) => item.id)
+      selectedCandidates.value = selectedCandidates.value.filter((id) => !currentIds.includes(id))
+    } else {
+      selectedCandidates.value = []
+    }
   }
 }
 
